@@ -290,9 +290,9 @@ else:
     st.error("Não foi possível carregar a lista base de inscritos no Pedal para validação.")
 
 
-# --- CONSULTA FINAL: INSCRIÇÕES DUPLICADAS ---
+# --- CONSULTA FINAL: SEGUNDO CICLISTA / DUPLICIDADES ---
 st.write("---")
-st.subheader("⚠️ Inscrições Duplicadas")
+st.subheader("⚠️ Comprou 2 inscrições. Falta indicar os dados do segundo ciclista")
 
 if col_nome and col_nome in df.columns and not df.empty:
     df_duplicados = df.copy()
@@ -314,10 +314,7 @@ if col_nome and col_nome in df.columns and not df.empty:
     )
 
     if not df_dups_encontrados.empty:
-        qtd_unicos = df_dups_encontrados["Nome_Normalizado"].nunique()
-        st.warning(
-            f"Foram encontradas **{len(df_dups_encontrados)}** inscrições pertencentes a **{qtd_unicos}** pessoa(s) duplicada(s) no filtro atual:"
-        )
+        st.warning("Contate o Ipiratuba Bike para ajustar os dados do outro ciclista.")
         
         # Seleciona colunas principais para exibir
         colunas_exibir = [col_nome]
@@ -334,6 +331,6 @@ if col_nome and col_nome in df.columns and not df.empty:
             hide_index=True,
         )
     else:
-        st.success("🎉 Nenhuma inscrição duplicada encontrada no filtro selecionado!")
+        st.success("🎉 Nenhuma pendência de dados encontrada no filtro selecionado!")
 else:
-    st.info("Coluna de nomes não identificada para checar duplicidades.")
+    st.info("Coluna de nomes não identificada para checar pendências.")
